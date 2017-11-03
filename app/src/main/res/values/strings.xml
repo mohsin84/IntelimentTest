@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Inteliment Test</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string-array name="test_names">
+        <item>Test One</item>
+        <item>Test Two</item>
+    </string-array>
+    <string-array name="five_items_array">
+        <item>Item 1</item>
+        <item>Item 2</item>
+        <item>Item 3</item>
+        <item>Item 4</item>
+        <item>Item 5</item>
+    </string-array>
+    <string name="google_maps_api_key">AIzaSyDqCUDBaR5PSfML7ut1M-4cq9HW2t5hRuA</string>
+</resources>

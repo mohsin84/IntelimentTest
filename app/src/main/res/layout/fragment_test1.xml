@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="ifour" type="String"/>
+    </data>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layoutManager="LinearLayoutManager"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" tools:listitem="@layout/five_items"
+            android:orientation="horizontal"
+            android:id="@+id/item_list" />
+        <android.support.v4.view.ViewPager
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_list"
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:text="TextView 1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pager"
+            android:textColor="@android:color/primary_text_light"
+            />
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:textColor="@android:color/primary_text_light"
+            app:layout_constraintStart_toEndOf="@+id/text1"
+            app:layout_constraintTop_toBottomOf="@id/text1"
+            android:text="TextView 2"
+            />
+        <TextView
+            android:id="@+id/text3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:textColor="@android:color/primary_text_light"
+            app:layout_constraintStart_toEndOf="@+id/text2"
+            app:layout_constraintTop_toBottomOf="@id/text2"
+            android:text="TextView 3"
+            />
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text3"
+            android:id="@+id/card"
+            cardCornerRadius="10dp"
+            cardElevation="10dp"
+            >
+            <TextView
+                android:id="@+id/text4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/default_margin"
+                android:textColor="@android:color/primary_text_light"
+                android:text="@{ifour}"
+                />
+        </android.support.v7.widget.CardView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card"
+            android:orientation="horizontal"
+            >
+            <android.support.v7.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Color1"
+                android:layout_margin="8dp"
+                android:id="@+id/redBtn"
+                />
+            <android.support.v7.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Color2"
+                android:layout_margin="8dp"
+                android:id="@+id/blueBtn"/>
+            <android.support.v7.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Color3"
+                android:layout_margin="8dp"
+                android:id="@+id/greenBtn"/>
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
