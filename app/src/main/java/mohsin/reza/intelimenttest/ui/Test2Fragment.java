@@ -1,32 +1,26 @@
 package mohsin.reza.intelimenttest.ui;
 
-import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import mohsin.reza.intelimenttest.BR;
 import mohsin.reza.intelimenttest.Model;
 import mohsin.reza.intelimenttest.R;
 import mohsin.reza.intelimenttest.databinding.FragmentTest2Binding;
 import mohsin.reza.intelimenttest.di.Injectable;
 import mohsin.reza.intelimenttest.util.AutoClearedValue;
-import mohsin.reza.intelimenttest.vo.Resource;
 import mohsin.reza.intelimenttest.vo.Route;
 
 /**
@@ -37,11 +31,10 @@ public class Test2Fragment extends Fragment implements Injectable{
     @Inject
     ViewModelProvider.Factory viewModelFactory;
 
-
     AutoClearedValue<FragmentTest2Binding> binding;
 
     private Test2ViewModel test2ViewModel;
-    List<CharSequence> myList;
+    LiveData<List<Route>> routeListBind;
     ArrayAdapter<CharSequence> adapter;
 
     @Nullable
@@ -51,7 +44,6 @@ public class Test2Fragment extends Fragment implements Injectable{
                         false);
 
         binding=new AutoClearedValue<>(this,dataBinding);
-
         return dataBinding.getRoot();
     }
 
@@ -60,14 +52,14 @@ public class Test2Fragment extends Fragment implements Injectable{
         super.onActivityCreated(savedInstanceState);
 
         test2ViewModel= ViewModelProviders.of(this,viewModelFactory).get(Test2ViewModel.class);
-        test2ViewModel.getResults_rList().observe(this,routeList -> {
+        routeListBind=test2ViewModel.getResults_rList();
+        routeListBind.observe(this,routeList -> {
             applyChange(routeList);
         });
 
         binding.get().mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.v("Test2frag","inside onClickCallBack");
                 Route route_obj=binding.get().getModel().getRoute();
                 Fragment mapfragment=MapFragment.Create(route_obj.name,route_obj.location.latitude,route_obj.location.longitude);
 
@@ -83,25 +75,12 @@ public class Test2Fragment extends Fragment implements Injectable{
     {
         if(froutList!=null)
         {
-            Model model=new Model(froutList);
+            Model model=new Model();
+            model.setRoutes(froutList);
             binding.get().setModel(model);
             binding.get().executePendingBindings();
         }
     }
-    public int getPosition(Spinner spinner) {
-        return spinner.getSelectedItemPosition();
-    }
 
-    public void OnClickCallback()
-    {
-        Log.v("Test2frag","inside onClickCallBack");
-        Route route_obj=binding.get().getRoute();
-        Fragment mapfragment=MapFragment.Create(route_obj.name,route_obj.location.latitude,route_obj.location.longitude);
-
-        getActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.content_frame,mapfragment)
-                .commit();
-    }
 }
 

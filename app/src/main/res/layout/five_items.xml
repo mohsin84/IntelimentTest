@@ -14,7 +14,6 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:textColor="#000"
-        android:textStyle="bold"
         />
 
 </layout>

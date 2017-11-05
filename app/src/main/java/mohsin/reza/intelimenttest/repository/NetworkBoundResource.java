@@ -7,11 +7,9 @@ import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
-import android.util.Log;
 
 import mohsin.reza.intelimenttest.AppExecutors;
 import mohsin.reza.intelimenttest.api.ApiResponse;
-import mohsin.reza.intelimenttest.vo.Resource;
 
 /**
  * Created by mohsin on 10/5/2017.
@@ -48,7 +46,6 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
 
     private void fetchFromNetwork(final LiveData<ResultType> dbSource) {
         LiveData<ApiResponse<RequestType>> apiResponse = createCall();
-        Log.v("fetchfrom Network","fetchfrom Network called");
 
         // we re-attach dbSource as a new source, it will dispatch its latest value quickly
         result.addSource(dbSource, newData -> result.setValue(newData));
@@ -57,11 +54,8 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
             public void onChanged(@Nullable ApiResponse<RequestType> response) {
                 result.removeSource(apiResponse);
                 result.removeSource(dbSource);
-                Log.v("fetchfrom Network","inside onChange");
 
-                //noinspection ConstantConditions
                 if (response.isSuccessful()) {
-                    Log.v("fetchfrom Network","response is successfull");
                     appExecutors.diskIO().execute(() -> {
                         NetworkBoundResource.this.saveCallResult(NetworkBoundResource.this.processResponse(response));
                         appExecutors.mainThread().execute(() ->

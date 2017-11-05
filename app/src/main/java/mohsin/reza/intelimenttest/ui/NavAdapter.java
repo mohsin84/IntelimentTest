@@ -1,13 +1,8 @@
 package mohsin.reza.intelimenttest.ui;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
-import mohsin.reza.intelimenttest.R;
 import mohsin.reza.intelimenttest.databinding.DrawerListItemBinding;
 
 /**

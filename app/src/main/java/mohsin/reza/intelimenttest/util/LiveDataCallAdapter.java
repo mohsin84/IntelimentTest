@@ -1,7 +1,6 @@
 package mohsin.reza.intelimenttest.util;
 
 import android.arch.lifecycle.LiveData;
-import android.util.Log;
 
 import java.lang.reflect.Type;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -41,14 +40,11 @@ public class LiveDataCallAdapter<R> implements CallAdapter<R, LiveData<ApiRespon
                     call.enqueue(new Callback<R>() {
                         @Override
                         public void onResponse(Call<R> call, Response<R> response) {
-                            Log.v("Success","Request succeed");
-
                             postValue(new ApiResponse<>(response));
                         }
 
                         @Override
                         public void onFailure(Call<R> call, Throwable t) {
-                            Log.v("Failure","Request failed");
                             postValue(new ApiResponse<R>(t));
                         }
                     });

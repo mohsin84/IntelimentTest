@@ -28,10 +28,8 @@ import mohsin.reza.intelimenttest.R;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback{
 
-    //AutoClearedValue<FragmentMapBinding> binding;
     Double Lat=0.0, Lng=0.0;
     String Name="";
-    private Context mContext;
     private SupportMapFragment supportMapFragment;
     private GoogleMap map;
 
@@ -39,7 +37,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
     @Override
     public View onCreateView(LayoutInflater layoutInflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View v=layoutInflater.inflate(R.layout.fragment_map,container,false);
-        mContext = getActivity();
         return v;
     }
 
@@ -50,9 +47,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
         Lat=Double.parseDouble(args.getString("latitude"));
         Lng=Double.parseDouble(args.getString("longitude"));
         Name=args.getString("name");
-        Log.v("MapFragment", args.getString("latitude")+","+args.getString("longitude"));
-        mContext = getActivity();
-
         FragmentManager fm = getActivity().getSupportFragmentManager();
         supportMapFragment = (SupportMapFragment) fm.findFragmentById(R.id.map_container);
         if (supportMapFragment == null) {
@@ -78,8 +72,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map=googleMap;
-
-        //map.animateCamera(CameraUpdateFactory.zoomTo(15));
         Log.v("latlong",Lat+","+Lng);
         map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         map.addMarker(new MarkerOptions().position(new LatLng(Lat,Lng)).title(Name));

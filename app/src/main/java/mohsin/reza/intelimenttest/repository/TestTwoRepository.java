@@ -1,12 +1,9 @@
 package mohsin.reza.intelimenttest.repository;
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.Observer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -19,7 +16,6 @@ import mohsin.reza.intelimenttest.api.IntelimentService;
 import mohsin.reza.intelimenttest.db.RoutDao;
 import mohsin.reza.intelimenttest.db.TestDB;
 import mohsin.reza.intelimenttest.util.RateLimiter;
-import mohsin.reza.intelimenttest.vo.Resource;
 import mohsin.reza.intelimenttest.vo.Route;
 
 /**
@@ -66,7 +62,7 @@ public class TestTwoRepository {
 
             @Override
             protected boolean shouldFetch(@Nullable List<Route> data) {
-                return data==null || data.isEmpty();//||repoListRateLimit.shouldFetch(fetchData);
+                return data==null || data.isEmpty()||repoListRateLimit.shouldFetch(fetchData);
             }
 
             @NonNull

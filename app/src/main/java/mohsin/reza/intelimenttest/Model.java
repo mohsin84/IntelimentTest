@@ -5,6 +5,7 @@ import android.databinding.Bindable;
 import android.databinding.InverseBindingMethod;
 import android.databinding.InverseBindingMethods;
 import android.graphics.Color;
+import android.util.Log;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -20,18 +21,56 @@ import mohsin.reza.intelimenttest.vo.Route;
 })
 public class Model extends BaseObservable {
     private List<Route> routeList;
+
     private String[] routes;
-    private int position;
+    private Integer position;
     private Route route;
+
     private Integer backColor=Color.WHITE;
-    public Model(final List<Route> routeList) {
+
+    public Model() {
+        Log.v("Model","New instance create");
+
+
+    }
+
+
+    @Bindable
+    public String[] getRoutes(){return routes;}
+
+    public void setRoutes(final List<Route> routeList)
+    {
+        Log.v("Model","Routes arrayList changed");
         this.routeList=routeList;
         List<String> abc=new ArrayList<String>();
         for (Route rt:routeList) {
             abc.add(rt.name);
         }
         routes=abc.toArray(new String[abc.size()]);
+        this.routes=routes;
+        notifyPropertyChanged(BR.routes);
     }
+
+    @Bindable
+    public Integer getPosition() {
+        return position;
+    }
+
+    public void setPosition(Integer position) {
+        Log.v("Model","Position changed");
+        this.position = position;
+        setRoute(routeList.get(position));
+    }
+
+    @Bindable
+    public Route getRoute(){return route;}
+
+    public void setRoute(Route route){
+        Log.v("Model","Route changed");
+        this.route=route;
+        notifyPropertyChanged(BR.route);
+    }
+
 
     @Bindable
     public void setBackColor(String backColor){
@@ -46,40 +85,6 @@ public class Model extends BaseObservable {
     public Integer getBackColor()
     {
         return backColor;
-    }
-
-    @Bindable
-    public String[] getRoutes(){return routes;}
-
-    public void setRoutes(String[] routes)
-    {
-        this.routes=routes;
-        //notifyPropertyChanged(BR.);
-        notifyPropertyChanged(BR.routes);
-    }
-
-    @Bindable
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-        setRoute(routeList.get(position));
-        //if (position != 0)
-
-    }
-
-    @Bindable
-    public Route getRoute(){return route;}
-
-    public void setRoute(Route route){
-        this.route=route;
-        notifyPropertyChanged(BR.route);
-    }
-
-    public int getPosition(Spinner spinner) {
-        return spinner.getSelectedItemPosition();
     }
 
 }

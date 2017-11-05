@@ -1,4 +1,4 @@
-<resources>
+<resources >
     <string name="app_name">Inteliment Test</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
@@ -14,4 +14,5 @@
         <item>Item 5</item>
     </string-array>
     <string name="google_maps_api_key">AIzaSyDqCUDBaR5PSfML7ut1M-4cq9HW2t5hRuA</string>
+
 </resources>

@@ -8,14 +8,12 @@ import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 import mohsin.reza.intelimenttest.databinding.ActivityMainBinding;
@@ -46,7 +44,6 @@ public class MainActivity extends AppCompatActivity  implements NavAdapter.OnIte
         mTitle = mDrawerTitle = getTitle();
         mTestTitles=getResources().getStringArray(R.array.test_names);
 
-        //binding.drawerLayout.setDrawerShadow(R.mipmap.drawer_shadow,GravityCompat.END);
         binding.drawerLayout.setDrawerShadow(R.mipmap.drawer_shadow,GravityCompat.START);
         binding.leftDrawer.setHasFixedSize(true);
 
@@ -58,17 +55,17 @@ public class MainActivity extends AppCompatActivity  implements NavAdapter.OnIte
         toggle=new ActionBarDrawerToggle(this,binding.drawerLayout,R.string.drawer_open,R.string.drawer_close){//check this
             public void onDrawerClosed(View view) {
                 setTitle(mTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                invalidateOptionsMenu();
             }
 
             public void onDrawerOpened(View drawerView) {
                 setTitle(mDrawerTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                invalidateOptionsMenu();
             }
         };
         binding.drawerLayout.addDrawerListener(toggle);
         if (savedInstanceState == null) {
-            selectItem("Test Two");
+            selectItem("Test One");
         }
 
     }
@@ -120,14 +117,11 @@ public class MainActivity extends AppCompatActivity  implements NavAdapter.OnIte
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //getMenuInflater().inflate(R.menu.navigation_drawer, menu);
         return true;
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        //boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        //menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
     @Override
@@ -135,19 +129,8 @@ public class MainActivity extends AppCompatActivity  implements NavAdapter.OnIte
         if (toggle.onOptionsItemSelected(item)) {
             return true;
         }
-        // Handle action buttons
         switch (item.getItemId()) {
-            /*case R.id.action_websearch:
-                // create intent to perform web search for this planet
-                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-                intent.putExtra(SearchManager.QUERY, getActionBar().getTitle());
-                // catch event that there's no activity to handle intent
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(this, R.string.app_not_available, Toast.LENGTH_LONG).show();
-                }
-                return true;*/
+
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -1,16 +1,9 @@
 package mohsin.reza.intelimenttest.api;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.util.ArrayMap;
 import android.util.Log;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import retrofit2.Response;
 
 /**

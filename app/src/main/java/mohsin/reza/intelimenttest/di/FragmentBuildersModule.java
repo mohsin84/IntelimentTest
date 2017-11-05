@@ -2,6 +2,7 @@ package mohsin.reza.intelimenttest.di;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
+import mohsin.reza.intelimenttest.ui.PagerFragment;
 import mohsin.reza.intelimenttest.ui.Test1Fragment;
 import mohsin.reza.intelimenttest.ui.Test2Fragment;
 
@@ -16,4 +17,7 @@ public abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract Test1Fragment contributeTest1Fragment();
+
+    @ContributesAndroidInjector
+    abstract PagerFragment contributePagerFragment();
 }

@@ -18,7 +18,6 @@ package mohsin.reza.intelimenttest.util;
 
 import android.os.SystemClock;
 import android.support.v4.util.ArrayMap;
-import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
 
@@ -38,13 +37,11 @@ public class RateLimiter<KEY> {
         long now = now();
         if (lastFetched == null) {
             timestamps.put(key, now);
-            Log.v("RateLimiter","Last Fetch Found null for"+key);
 
             return true;
         }
         if (now - lastFetched > timeout) {
             timestamps.put(key, now);
-            Log.v("RateLimiter","Last Fetch time out");
             return true;
         }
         return false;

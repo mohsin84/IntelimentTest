@@ -21,7 +21,7 @@ public class FiveItemAdapter extends RecyclerView.Adapter<FiveItemAdapter.ViewHo
         this.mListener=mListener;
     }
     public interface OnItemClickListener {
-        public void onClick(String name);
+        void onClick(String name);
     }
 
     @Override
