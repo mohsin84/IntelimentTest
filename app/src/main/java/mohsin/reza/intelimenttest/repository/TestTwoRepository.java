@@ -62,7 +62,7 @@ public class TestTwoRepository {
 
             @Override
             protected boolean shouldFetch(@Nullable List<Route> data) {
-                return data==null || data.isEmpty()||repoListRateLimit.shouldFetch(fetchData);
+                return data==null || data.isEmpty();//||repoListRateLimit.shouldFetch(fetchData);
             }
 
             @NonNull

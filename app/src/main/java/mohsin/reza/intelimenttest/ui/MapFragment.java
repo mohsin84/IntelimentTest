@@ -31,30 +31,28 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
     Double Lat=0.0, Lng=0.0;
     String Name="";
     private SupportMapFragment supportMapFragment;
-    private GoogleMap map;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater layoutInflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View v=layoutInflater.inflate(R.layout.fragment_map,container,false);
-        return v;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
         Bundle args = getArguments();
         Lat=Double.parseDouble(args.getString("latitude"));
         Lng=Double.parseDouble(args.getString("longitude"));
         Name=args.getString("name");
-        FragmentManager fm = getActivity().getSupportFragmentManager();
+        FragmentManager fm = getChildFragmentManager();
         supportMapFragment = (SupportMapFragment) fm.findFragmentById(R.id.map_container);
         if (supportMapFragment == null) {
             supportMapFragment = SupportMapFragment.newInstance();
             fm.beginTransaction().replace(R.id.map_container, supportMapFragment).commit();
         }
         supportMapFragment.getMapAsync(this);
+        return v;
+    }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 
 
@@ -71,9 +69,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        map=googleMap;
-        Log.v("latlong",Lat+","+Lng);
-        map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-        map.addMarker(new MarkerOptions().position(new LatLng(Lat,Lng)).title(Name));
+        Log.v("latlong",Name+": "+Lat+","+Lng);
+        LatLng sydney = new LatLng(Lat, Lng);
+
+        googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        googleMap.addMarker(new MarkerOptions().position(sydney).title(Name));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }

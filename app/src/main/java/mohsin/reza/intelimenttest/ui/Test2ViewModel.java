@@ -24,6 +24,7 @@ import mohsin.reza.intelimenttest.vo.Route;
 
 public class Test2ViewModel extends ViewModel {
     private final LiveData<List<Route>> results;
+    private MutableLiveData<Integer> position_viewmodel=new MutableLiveData<Integer>();
     @Inject
     Test2ViewModel(TestTwoRepository testTwoRepository)
     {
@@ -41,6 +42,13 @@ public class Test2ViewModel extends ViewModel {
 
     LiveData<List<Route>> getResults_rList(){
         return  results;
+    }
+
+    public LiveData<Integer> getPosition_viewmodel(){
+        return position_viewmodel;
+    }
+    public void setPosition_viewmodel(int in){
+        position_viewmodel.setValue(in);
     }
 
 }

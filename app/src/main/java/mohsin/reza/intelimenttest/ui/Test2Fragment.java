@@ -7,16 +7,18 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import mohsin.reza.intelimenttest.Model;
 import mohsin.reza.intelimenttest.R;
 import mohsin.reza.intelimenttest.databinding.FragmentTest2Binding;
 import mohsin.reza.intelimenttest.di.Injectable;
@@ -34,8 +36,8 @@ public class Test2Fragment extends Fragment implements Injectable{
     AutoClearedValue<FragmentTest2Binding> binding;
 
     private Test2ViewModel test2ViewModel;
-    LiveData<List<Route>> routeListBind;
-    ArrayAdapter<CharSequence> adapter;
+    List<Route> myroutarr;
+    SpinnerAdapter spinnerAdapter;
 
     @Nullable
     @Override
@@ -52,15 +54,49 @@ public class Test2Fragment extends Fragment implements Injectable{
         super.onActivityCreated(savedInstanceState);
 
         test2ViewModel= ViewModelProviders.of(this,viewModelFactory).get(Test2ViewModel.class);
-        routeListBind=test2ViewModel.getResults_rList();
-        routeListBind.observe(this,routeList -> {
-            applyChange(routeList);
+
+        myroutarr=new ArrayList<Route>();
+        test2ViewModel.getResults_rList().observe(this,routeList -> {
+            if(routeList!=null)
+            {
+                int i = 0;
+                if(myroutarr==null) {
+                    myroutarr=routeList;
+                }
+                else if(myroutarr.size()<routeList.size())
+                {
+                    myroutarr=routeList;
+                }
+                spinnerAdapter=new SpinnerAdapter(getContext(),android.R.layout.simple_spinner_item,myroutarr);
+                binding.get().spinner.setAdapter(spinnerAdapter);
+            }
         });
 
+        LiveData<Integer> pos=test2ViewModel.getPosition_viewmodel();
+        pos.observe(this,integer -> {
+            binding.get().setPosition(integer);
+            if(myroutarr.size()>0)
+            binding.get().setRoute(myroutarr.get(integer));
+            binding.get().executePendingBindings();
+        });
+
+        binding.get().spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                test2ViewModel.setPosition_viewmodel(position);
+                binding.get().setRoute(myroutarr.get(position));
+                binding.get().executePendingBindings();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         binding.get().mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Route route_obj=binding.get().getModel().getRoute();
+                Route route_obj=binding.get().getRoute();
                 Fragment mapfragment=MapFragment.Create(route_obj.name,route_obj.location.latitude,route_obj.location.longitude);
 
                 getActivity().getSupportFragmentManager()
@@ -69,17 +105,6 @@ public class Test2Fragment extends Fragment implements Injectable{
                         .commit();
             }
         });
-    }
-
-    public void applyChange(final List<Route> froutList)
-    {
-        if(froutList!=null)
-        {
-            Model model=new Model();
-            model.setRoutes(froutList);
-            binding.get().setModel(model);
-            binding.get().executePendingBindings();
-        }
     }
 
 }

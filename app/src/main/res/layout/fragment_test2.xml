@@ -5,7 +5,9 @@
     <data>
         <import type="java.util.List"/>
         <variable name="route" type="mohsin.reza.intelimenttest.vo.Route"/>
-        <variable name="model" type="mohsin.reza.intelimenttest.Model"/>
+        <variable
+            name="position"
+            type="Integer"/>
     </data>
     <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,16 +19,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="@dimen/default_margin"
-            android:entries="@{model.routes}"
-            android:selectedItemPosition="@={model.position}"
+            android:selectedItemPosition="@{position}"
             />
         <TextView
             android:id="@+id/mode_of_transport"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
-            tools:text="Mode of Transport"
-            android:textStyle="bold"
+            android:text="Mode of Transport:"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/spinner"
             android:textColor="@android:color/primary_text_light"
@@ -35,8 +35,9 @@
             android:id="@+id/transport_car"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
-            android:text='@{"Car -"+ model.route.fromcentral.car }'
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="@dimen/default_margin"
+            android:text='@{"Car -"+ route.fromcentral.car }'
             tools:text="Car 40 Mins"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mode_of_transport"
@@ -46,9 +47,10 @@
             android:id="@+id/transport_train"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="@dimen/default_margin"
             tools:text="Train 40 Mins"
-            android:text='@{model.route.fromcentral.train !=null? "Train -"+ model.route.fromcentral.train:"Train - N/A"}'
+            android:text='@{route.fromcentral.train !=null? "Train -"+ route.fromcentral.train:"Train - N/A"}'
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/transport_car"
             android:textColor="@android:color/primary_text_light"
@@ -58,7 +60,7 @@
             android:id="@+id/map_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
+            android:layout_marginLeft="@dimen/default_margin"
             android:layout_marginTop="40dp"
             android:text="Navigate"
             app:layout_constraintEnd_toEndOf="parent"
