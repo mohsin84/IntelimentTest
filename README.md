@@ -15,7 +15,7 @@ I used android architecture components in this project following MVVM pattern</l
 <ol>
 <li><a href="https://developer.android.com/topic/libraries/architecture/index.html">Android Architecture Components</a>: Used Live Data, ViewModel, Room ersistent database and other lifecycle aware components</li> 
 <li><a href="https://developer.android.com/topic/libraries/data-binding/index.html">Android Data Binding</a>: Using Data binding significantly reduce boiler plate codes. I used one way data binding in this example</li>
-<li>a href="https://developer.android.com/topic/libraries/support-library/index.html">Android Support Library</a>: Used for fragments and fragment manager support libraries</li> 
+<li><a href="https://developer.android.com/topic/libraries/support-library/index.html">Android Support Library</a>: Used for fragments and fragment manager support libraries</li> 
 <li><a href="https://google.github.io/dagger/">Dagger 2 </a>: Used for simplified access to shared instances mainly and to show my knowledge on dependency injection</li>
 </ol>
 
