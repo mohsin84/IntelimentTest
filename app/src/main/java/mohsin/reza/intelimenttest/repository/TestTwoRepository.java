@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import mohsin.reza.intelimenttest.AppExecutors;
 import mohsin.reza.intelimenttest.api.ApiResponse;
@@ -21,7 +22,7 @@ import mohsin.reza.intelimenttest.vo.Route;
 /**
  * Created by Mohsin on 11/1/2017.
  */
-
+@Singleton
 public class TestTwoRepository {
 
     private final AppExecutors appExecutors;
